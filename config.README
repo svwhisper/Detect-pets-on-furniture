@@ -1,0 +1,48 @@
+Main Settings
+
+rtsp_url: The live video stream address from your camera.
+Example: "rtsp://user:pass@192.168.1.50:554/stream1"
+Note: If left empty "", the script will ask you to type it in manually when it starts.
+
+MQTT (Smart Home Integration)
+
+broker: The IP address of your MQTT server (e.g., Home Assistant or Mosquitto).
+port: Standard port is 1883.
+topic_status: The topic where the script publishes detection events.
+Payload: "dog snapshot_filename.jpg" or "clear".
+topic_error: The topic for reporting system crashes or camera loss.
+
+FTP (Remote Storage)
+server, user, pass: Credentials for your FTP server (e.g., a NAS or router storage).
+dir: The specific folder on the FTP server where snapshot images will be uploaded.
+
+Model (AI Settings)
+name: The specific YOLO model version file to load.
+Recommended: "yolo11l-seg" (Large Segmentation model) for best accuracy.
+Alternative: "yolo11n-seg" (Nano) for faster speed on older hardware.
+
+confidence_threshold (0.0 to 1.0): How certain the AI needs to be before it "sees" an object.
+Current (0.25): Low threshold. Good for catching pets in weird sleeping poses or low light.
+
+iou_threshold (0.0 to 1.0): "Intersection over Union" (Containment).
+Current (0.90): Strict. 90% of the pet's body must be inside the furniture boundary. This prevents false alarms when the pet is standing on the floor in front of the sofa.
+
+Tuning (Performance & Logic)
+frame_skip: How many frames to ignore between analysis.
+Current (4): Analyses 1 frame, skips 4. Effectively runs at 20% of the camera's framerate to save CPU/Heat.
+
+clear_threshold_checks: How many consecutive "empty" checks are needed before the system declares the couch "clear." Prevents flickering if the dog moves for a split second.
+
+erosion_sofa (Pixels): How much to shrink the sofa mask.
+Purpose: Removes the front vertical panel/kickplate from detection so a dog standing in front doesn't trigger it.
+erosion_chair (Pixels): How much to shrink chair masks. usually smaller than sofa erosion because chairs are narrower.
+
+Persistence (Memory)
+max_missed_frames: How long to "remember" where the furniture is if the AI stops detecting it (e.g., due to lighting changes or occlusion).
+Current (100): Remembers the sofa location for about 10-20 seconds (depending on framerate) after it vanishes.
+
+Image save cooldown
+snapshot_cooldown (300): Number of seconds to wait before saving another detection image.  Prevents saving hundreds of images for a pet on the furniture for a long time.
+
+Directories
+snapshot_dir: Local folder name where images are saved before FTP upload.

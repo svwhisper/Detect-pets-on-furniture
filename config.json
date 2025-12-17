@@ -1,0 +1,33 @@
+{
+    "rtsp_url": "rtsp://YOUR_CAM_USERID:YOUR_CAM_PWD@YOUR_CAM_IP:554/stream1",
+    "mqtt": {
+        "broker": "YOUR_MQTT_BROKER_IP",
+        "port": 1883,
+        "topic_status": "home/livingroom/sofa_status",
+        "topic_error": "home/livingroom/sofa_error"
+    },
+    "ftp": {
+        "server": "YOUR_FTP_SERVER_IP,
+        "user": "YOUR_FTP_USERID",
+        "pass": "YOUR_FTP_SERVER_PASSWORD",
+        "dir": "Animals"
+    },
+    "model": {
+        "name": "yolo11l-seg",
+        "confidence_threshold": 0.25,
+        "iou_threshold": 0.90
+    },
+    "tuning": {
+        "frame_skip": 8,
+        "clear_threshold_checks": 2,
+        "error_cooldown_seconds": 60,
+        "camera_error_threshold": 5,
+        "erosion_sofa": 20,
+        "erosion_chair": 10,
+        "snapshot_cooldown": 300
+    },
+    "persistence": {
+        "max_missed_frames": 100
+    },
+    "snapshot_dir": "snapshots"
+}
