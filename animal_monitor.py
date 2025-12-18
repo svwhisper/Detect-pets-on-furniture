@@ -145,7 +145,7 @@ last_error_time = 0
 last_camera_error_msg = None
 last_camera_error_time = 0
 
-# FIX: Missing Variable Restored
+# Variables restored to prevent NameError
 last_valid_animal = "clear"
 
 # Track last snapshot time
@@ -269,8 +269,15 @@ while True:
             continue
 
         frame = cv.resize(frame, (640, 480))
+        
+        # --- NEW: CAMERA RECOVERY CHECK ---
+        # If we successfully read a frame, but the system still has an "Error" status logged,
+        # we immediately clear it so the status topic shows "clear" instead of "Error:..."
         if last_camera_error_msg is not None:
+            client.publish(MQTT_TOPIC_STATUS, "clear", retain=True)
+            print(f"MQTT PUBLISH: {MQTT_TOPIC_STATUS} -> clear (Error Recovery)")
             last_camera_error_msg = None
+            last_published_state = "clear" # Sync state logic
 
         results = model(frame, verbose=False, conf=CONFIDENCE_THRESHOLD)
         result = results[0]
