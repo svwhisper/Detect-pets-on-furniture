@@ -13,6 +13,7 @@ The script will alert when a dog or cat is completely on a sofa or chair, but no
 ## Getting Started
 1. Clone this repository.
 2. Update the `config.json` file with your RTSP feed URL and tweak any other parameters you want.
+3. The code will automatically download your chosen YOLO model the first invocation and, if on a Mac with ANE, will compile the model into the ANE format
 
 ## Usage
 1. Run the `animal_monitor.py` script to launch the RTSP stream and start the object detector.  On my Mac, I use PM2 to daemonise and manage this process.
