@@ -8,6 +8,8 @@ I have not tested this on other platforms, but believe it will work, as there is
 
 The original project triggered a wireless dog collar, but I've removed that code and use it only for detection.  I have a buzzer on order and will trigger that using Node Red, which receives the mqtt messages published by this project.
 
+The script will alert when a dog or cat is completely on a sofa or chair, but not if a human is present.
+
 ## Getting Started
 1. Clone this repository.
 2. Update the `config.json` file with your RTSP feed URL and tweak any other parameters you want.
