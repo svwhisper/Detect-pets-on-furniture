@@ -1,4 +1,17 @@
 import cv2
+import json
+
+
+# --- LOAD CONFIGURATION ---
+try:
+    with open('config.json', 'r') as config_file:
+        config = json.load(config_file)
+except FileNotFoundError:
+    print("CRITICAL ERROR: config.json not found!")
+    sys.exit(1)
+except json.JSONDecodeError:
+    print("CRITICAL ERROR: config.json is invalid JSON!")
+    sys.exit(1)
 
 rtsp_url = config.get("rtsp_url", "")
 
