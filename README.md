@@ -1,4 +1,4 @@
-# Pet Monitoring Camera
+# AI Pet Monitoring Camera
 
 Ever wonder if your dog or cat is sneaking onto the furniture while you're away? This project uses a TP-Link camera broadcasting an RTSP feed, [YOLO real-time object detector](https://docs.ultralytics.com/models/yolo11/#overview) to catch couch-surfing pets in the act. Monitor their mischief and win the battle of "No pets on the furniture!"
 
